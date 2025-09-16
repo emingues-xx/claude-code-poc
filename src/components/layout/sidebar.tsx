@@ -1,8 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { NavItem } from '@/components/ui/nav-item';
 import { cn } from '@/lib/utils';
-import { Home, Settings, User, FileText, X, ChevronLeft } from 'lucide-react';
+import { LayoutDashboard, Megaphone, Info, X, ChevronLeft } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -10,10 +11,9 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { icon: Home, label: 'Dashboard', href: '/' },
-  { icon: User, label: 'Profile', href: '/profile' },
-  { icon: FileText, label: 'Documents', href: '/documents' },
-  { icon: Settings, label: 'Settings', href: '/settings' },
+  { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
+  { icon: Megaphone, label: 'Anúncios', href: '/anuncios' },
+  { icon: Info, label: 'Sobre', href: '/sobre' },
 ];
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
@@ -67,28 +67,15 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           {/* Navigation */}
           <nav className="flex-1 px-3 py-4">
             <ul className="space-y-2">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <li key={item.label}>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        'w-full justify-start h-10 px-3 font-normal hover:bg-accent hover:text-accent-foreground',
-                        !isOpen && 'md:w-10 md:px-0 md:justify-center'
-                      )}
-                    >
-                      <Icon className="h-4 w-4 shrink-0" />
-                      <span className={cn(
-                        'ml-3 truncate transition-opacity duration-200',
-                        !isOpen && 'md:hidden'
-                      )}>
-                        {item.label}
-                      </span>
-                    </Button>
-                  </li>
-                );
-              })}
+              {menuItems.map((item) => (
+                <NavItem
+                  key={item.label}
+                  icon={item.icon}
+                  label={item.label}
+                  href={item.href}
+                  isCollapsed={!isOpen}
+                />
+              ))}
             </ul>
           </nav>
         </div>
