@@ -25,7 +25,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Header onMenuToggle={handleMenuToggle} />
       
       <div className="flex h-[calc(100vh-3.5rem)] mt-14">
-        <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} />
+        <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} onToggle={handleMenuToggle} />
         
         <main 
           className={cn(

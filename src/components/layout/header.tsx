@@ -12,10 +12,13 @@ export function Header({ onMenuToggle }: HeaderProps) {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
+    console.log('🎨 Theme button clicked! Current theme:', theme);
     const themes: Array<'light' | 'dark' | 'system'> = ['light', 'dark', 'system'];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
+    const nextTheme = themes[nextIndex];
+    console.log('🔄 Changing theme from', theme, 'to', nextTheme);
+    setTheme(nextTheme);
   };
 
   const getThemeIcon = () => {
