@@ -19,15 +19,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    const storedTheme = localStorage.getItem('theme') as Theme;
-    const validTheme = storedTheme && ['light', 'dark', 'system'].includes(storedTheme) 
-      ? storedTheme 
-      : 'light';
-    setTheme(validTheme);
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme') as Theme;
+      const validTheme = storedTheme && ['light', 'dark', 'system'].includes(storedTheme) 
+        ? storedTheme 
+        : 'light';
+      setTheme(validTheme);
+    }
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || typeof window === 'undefined') return;
 
     const updateResolvedTheme = () => {
       if (theme === 'system') {
@@ -50,24 +52,37 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme, mounted]);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || typeof window === 'undefined') return;
 
+    console.log('🎯 Applying resolvedTheme to DOM:', resolvedTheme);
     const root = document.documentElement;
     if (resolvedTheme === 'dark') {
       root.setAttribute('data-theme', 'dark');
+      console.log('🌙 Applied dark theme to DOM');
     } else {
       root.removeAttribute('data-theme');
+      console.log('☀️ Applied light theme to DOM');
     }
   }, [resolvedTheme, mounted]);
 
   const setThemeAndPersist = (newTheme: Theme) => {
+    console.log('🏗️ ThemeProvider: setThemeAndPersist called with:', newTheme);
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', newTheme);
+      console.log('💾 Saved to localStorage:', newTheme);
+      
+      // Force immediate DOM update
+      const root = document.documentElement;
+      if (newTheme === 'light') {
+        root.removeAttribute('data-theme');
+        console.log('🌞 Forced light theme removal');
+      } else if (newTheme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        console.log('🌙 Forced dark theme application');
+      }
+    }
   };
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <ThemeContext.Provider 

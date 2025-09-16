@@ -8,6 +8,7 @@ import { LayoutDashboard, Megaphone, Info, X, ChevronLeft } from 'lucide-react';
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  onToggle?: () => void;
 }
 
 const menuItems = [
@@ -16,7 +17,7 @@ const menuItems = [
   { icon: Info, label: 'Sobre', href: '/sobre' },
 ];
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, onToggle }: SidebarProps) {
   return (
     <>
       {/* Overlay for mobile */}
@@ -54,7 +55,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             <Button
               variant="outline"
               size="sm"
-              onClick={onClose}
+              onClick={onToggle}
               className={cn(
                 'w-10 h-10 p-0 transition-transform duration-200',
                 !isOpen && 'rotate-180'
