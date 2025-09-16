@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #172b4d;
+  --primary: #0052cc;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f5f7;
+  --secondary-foreground: #42526e;
+  --muted: #f4f5f7;
+  --muted-foreground: #6b778c;
+  --accent: #ebecf0;
+  --accent-foreground: #172b4d;
+  --destructive: #de350b;
+  --destructive-foreground: #ffffff;
+  --border: #dfe1e6;
+  --input: #fafbfc;
+  --ring: #0052cc;
+  --radius: 0.375rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: var(--radius);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+[data-theme="dark"] {
+  --background: #1d2125;
+  --foreground: #b6c2cf;
+  --primary: #579dff;
+  --primary-foreground: #001122;
+  --secondary: #22272b;
+  --secondary-foreground: #9fadbc;
+  --muted: #2c333a;
+  --muted-foreground: #738496;
+  --accent: #282e33;
+  --accent-foreground: #b6c2cf;
+  --destructive: #ff5630;
+  --destructive-foreground: #ffffff;
+  --border: #2c333a;
+  --input: #22272b;
+  --ring: #579dff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --primary: #0ea5e9;
+    --primary-foreground: #0f172a;
+    --secondary: #27272a;
+    --secondary-foreground: #fafafa;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --accent: #27272a;
+    --accent-foreground: #fafafa;
+    --destructive: #dc2626;
+    --destructive-foreground: #fef2f2;
+    --border: #3f3f46;
+    --input: #3f3f46;
+    --ring: #0ea5e9;
+  }
+}
+
+* {
+  transition: 
+    background-color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    color 300ms ease-in-out,
+    fill 300ms ease-in-out,
+    stroke 300ms ease-in-out,
+    opacity 300ms ease-in-out,
+    box-shadow 300ms ease-in-out,
+    backdrop-filter 300ms ease-in-out;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Force theme colors to be applied directly */
+html[data-theme="dark"] {
+  background-color: #1d2125 !important;
+  color: #b6c2cf !important;
+}
+
+html[data-theme="dark"] body {
+  background-color: #1d2125 !important;
+  color: #b6c2cf !important;
+}
+
+html:not([data-theme]) {
+  background-color: #ffffff !important;
+  color: #172b4d !important;
+}
+
+html:not([data-theme]) body {
+  background-color: #ffffff !important;
+  color: #172b4d !important;
+}
+
+/* Light theme specific overrides */
+html:not([data-theme]) .bg-background {
+  background-color: #ffffff !important;
+}
+
+html:not([data-theme]) .text-foreground {
+  color: #172b4d !important;
+}
+
+html:not([data-theme]) .bg-secondary {
+  background-color: #f4f5f7 !important;
+}
+
+html:not([data-theme]) .border-border {
+  border-color: #dfe1e6 !important;
+}
+
+html:not([data-theme]) header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: #dfe1e6 !important;
+}
+
+html:not([data-theme]) aside {
+  background-color: #ffffff !important;
+  border-color: #dfe1e6 !important;
+}
+
+/* Apply to all elements */
+html[data-theme="dark"] * {
+  background-color: inherit;
+  color: inherit;
+}
+
+/* Specific overrides for components */
+html[data-theme="dark"] .bg-background {
+  background-color: #000000 !important;
+}
+
+html[data-theme="dark"] .text-foreground {
+  color: #ffffff !important;
+}
+
+/* Dark theme for all component classes */
+html[data-theme="dark"] .bg-primary {
+  background-color: #579dff !important;
+}
+
+html[data-theme="dark"] .text-primary-foreground {
+  color: #001122 !important;
+}
+
+html[data-theme="dark"] .bg-secondary {
+  background-color: #22272b !important;
+}
+
+html[data-theme="dark"] .text-secondary-foreground {
+  color: #9fadbc !important;
+}
+
+html[data-theme="dark"] .border-border {
+  border-color: #2c333a !important;
+}
+
+html[data-theme="dark"] .bg-muted {
+  background-color: #2c333a !important;
+}
+
+html[data-theme="dark"] .text-muted-foreground {
+  color: #738496 !important;
+}
+
+/* Header specific */
+html[data-theme="dark"] header {
+  background-color: rgba(29, 33, 37, 0.95) !important;
+  border-color: #2c333a !important;
+}
+
+/* Sidebar specific */
+html[data-theme="dark"] aside {
+  background-color: #22272b !important;
+  border-color: #2c333a !important;
+}
+
+/* Button specific */
+html[data-theme="dark"] button {
+  border-color: #2c333a !important;
+}
+
+html[data-theme="dark"] .bg-accent {
+  background-color: #282e33 !important;
+}
+
+html[data-theme="dark"] .text-accent-foreground {
+  color: #b6c2cf !important;
+}
+
+/* JIRA-style improvements */
+button {
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+button:hover {
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.13);
+}
+
+html[data-theme="dark"] button:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Card and container styles - JIRA style */
+.bg-background {
+  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+}
+
+html[data-theme="dark"] .bg-background {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* JIRA-specific navigation styles */
+nav a {
+  transition: background-color 0.1s ease;
+  border-radius: 3px;
+}
+
+nav a:hover {
+  background-color: var(--accent);
+}
+
+html[data-theme="dark"] nav a:hover {
+  background-color: var(--accent);
+}
+
+/* Success and warning colors - JIRA style */
+.text-success {
+  color: #00875a !important;
+}
+
+html[data-theme="dark"] .text-success {
+  color: #36b37e !important;
+}
+
+.text-warning {
+  color: #ff8b00 !important;
+}
+
+html[data-theme="dark"] .text-warning {
+  color: #ffab00 !important;
+}
+
+.bg-success {
+  background-color: #e3fcef !important;
+}
+
+html[data-theme="dark"] .bg-success {
+  background-color: #1f2d23 !important;
+}
+
+.bg-warning {
+  background-color: #fffae6 !important;
+}
+
+html[data-theme="dark"] .bg-warning {
+  background-color: #2d2a1f !important;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 767px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Tablet breakpoint (768px) */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Ensure sidebar transitions work smoothly on tablet+ */
+  .sidebar-transition {
+    transition: width 200ms ease-in-out, margin-left 200ms ease-in-out;
+  }
+}
