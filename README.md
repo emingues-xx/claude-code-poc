@@ -1,1 +1,3 @@
-# claude-code-poc
+# Projeto 2
+
+Descrição do projeto.
